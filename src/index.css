@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-primary: #0f7b6c;
+    --brand-secondary: #16a37b;
+    --brand-light: #e6f7f3;
+    --surface-dark: #0f1117;
+    --surface-card: #ffffff;
+    --surface-page: #f4f6f9;
+    --text-primary: #1a1d23;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --info: #3b82f6;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+}
+
+@layer components {
+  /* Animation for mobile sidebar */
+  .animate-slide-in-left {
+    animation: slideInLeft 0.25s ease-out;
+  }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    @apply animate-pulse bg-gray-200 rounded;
+  }
+}
+
+@layer utilities {
+  .border-3 {
+    border-width: 3px;
+  }
+}
