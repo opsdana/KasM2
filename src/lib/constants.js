@@ -25,6 +25,24 @@ export const ROLE_COLOR = {
   CABANG_PEMBANTU: 'bg-orange-100 text-orange-800',
 }
 
+export const TIPE_UNIT = {
+  CABANG_INDUK: 'CABANG_INDUK',
+  KANTOR_FUNGSIONAL: 'KANTOR_FUNGSIONAL',
+  CABANG_PEMBANTU: 'CABANG_PEMBANTU',
+}
+
+export const TIPE_UNIT_LABEL = {
+  CABANG_INDUK: 'Cabang Induk',
+  KANTOR_FUNGSIONAL: 'Kantor Fungsional',
+  CABANG_PEMBANTU: 'Cabang Pembantu',
+}
+
+export const TIPE_UNIT_COLOR = {
+  CABANG_INDUK: 'bg-blue-100 text-blue-800',
+  KANTOR_FUNGSIONAL: 'bg-green-100 text-green-800',
+  CABANG_PEMBANTU: 'bg-orange-100 text-orange-800',
+}
+
 export const STATUS_REKENING_COLOR = {
   AKTIF: 'green',
   PASIF: 'yellow',

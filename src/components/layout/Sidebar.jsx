@@ -77,6 +77,12 @@ const menuItems = [
         roles: [ROLE.SUPER_ADMIN, ROLE.CABANG_INDUK],
       },
       {
+        label: 'Manajemen Unit Kerja',
+        icon: Building2,
+        href: '/admin/unit-kerja',
+        roles: [ROLE.SUPER_ADMIN],
+      },
+      {
         label: 'Log Aktivitas',
         icon: Activity,
         href: '/admin/log',

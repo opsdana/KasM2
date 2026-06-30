@@ -39,6 +39,7 @@ export default function Topbar({ onMenuClick }) {
     if (location.pathname.startsWith('/patroli/')) return 'Detail Patroli'
     if (location.pathname.startsWith('/patroli')) return 'Patroli Kepatuhan'
     if (location.pathname.startsWith('/admin/users')) return 'Manajemen User'
+    if (location.pathname.startsWith('/admin/unit-kerja')) return 'Manajemen Unit Kerja'
     if (location.pathname.startsWith('/admin/log')) return 'Log Aktivitas'
     return 'Monitoring Nasabah'
   }

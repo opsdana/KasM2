@@ -11,6 +11,7 @@ import PatroliKepatuhanPage from '@/pages/patroli/PatroliKepatuhanPage'
 import FormPatroliPage from '@/pages/patroli/FormPatroliPage'
 import DetailPatroliPage from '@/pages/patroli/DetailPatroliPage'
 import ManajemenUserPage from '@/pages/admin/ManajemenUserPage'
+import ManajemenUnitKerjaPage from '@/pages/admin/ManajemenUnitKerjaPage'
 import LogAktivitasPage from '@/pages/admin/LogAktivitasPage'
 
 export default function App() {
@@ -99,6 +100,14 @@ export default function App() {
             element={
               <ProtectedRoute allowedRoles={[ROLE.SUPER_ADMIN]}>
                 <LogAktivitasPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/unit-kerja"
+            element={
+              <ProtectedRoute allowedRoles={[ROLE.SUPER_ADMIN]}>
+                <ManajemenUnitKerjaPage />
               </ProtectedRoute>
             }
           />
