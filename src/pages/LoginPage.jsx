@@ -71,8 +71,8 @@ export default function LoginPage() {
                 <Building2 className="h-8 w-8 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold">Bank Monitor</h1>
-                <p className="text-brand-light text-sm">Sistem Monitoring Terintegrasi</p>
+                <h1 className="text-2xl font-bold">CIF Monitor Cabang Lumajang</h1>
+                <p className="text-brand-light text-sm">Sistem Monitoring Kepatuhan Data Nasabah</p>
               </div>
             </div>
             <h2 className="text-3xl font-bold leading-tight mb-3">
