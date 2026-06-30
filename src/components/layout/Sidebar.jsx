@@ -169,8 +169,8 @@ export default function Sidebar({ isOpen, onClose }) {
           <Building2 className="h-6 w-6 text-white" />
         </div>
         <div>
-          <h1 className="text-sm font-bold text-white leading-tight">Bank Monitor</h1>
-          <p className="text-xs text-brand-secondary font-medium">Monitoring Nasabah</p>
+          <h1 className="text-sm font-bold text-white leading-tight">CIF Monitor</h1>
+          <p className="text-xs text-brand-secondary font-medium">Cabang Lumajang</p>
         </div>
       </div>
 
