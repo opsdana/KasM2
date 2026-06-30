@@ -54,15 +54,17 @@ export default function ManajemenUnitKerjaPage() {
     fetchUnits()
   }, [fetchUnits])
 
-  // Load parent units dropdown
+  // Load parent units dropdown — refresh setiap form dibuka
   useEffect(() => {
+    if (!showForm) return
     supabase.from('unit_kerja')
       .select('kode_unit, nama_unit, tipe_unit')
+      .eq('aktif', true)
       .order('kode_unit')
       .then(({ data }) => {
         if (data) setParentUnits(data)
       })
-  }, [])
+  }, [showForm])
 
   const openAddForm = () => {
     setEditingUnit(null)
