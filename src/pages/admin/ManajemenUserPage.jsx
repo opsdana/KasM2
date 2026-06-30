@@ -87,34 +87,38 @@ export default function ManajemenUserPage() {
     setMessage(null)
 
     try {
-      // 1. Buat auth user di Supabase
-      const { data: authData, error: authError } = await supabase.auth.admin?.createUser
-        ? await supabase.auth.admin.createUser({
+      // Call Edge Function (pakai service_role di backend)
+      const { data: session } = await supabase.auth.getSession()
+      const token = session?.access_token
+
+      if (!token) {
+        throw new Error('Sesi tidak valid. Silakan login ulang.')
+      }
+
+      const res = await fetch(
+        'https://zaycilkvyoftkldiokmj.supabase.co/functions/v1/create-user',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          body: JSON.stringify({
             email: form.email,
             password: form.password,
-            email_confirm: true,
-          })
-        : { error: { message: 'Admin API tidak tersedia. Gunakan Supabase Dashboard untuk membuat user auth, lalu tambahkan profil di sini.' } }
-
-      if (authError) throw authError
-
-      // 2. Insert profile jika auth user berhasil dibuat
-      if (authData?.user) {
-        const { error: profileError } = await supabase
-          .from('profiles')
-          .insert({
-            id: authData.user.id,
             nama_lengkap: form.nama_lengkap,
             nip: form.nip || null,
             kode_unit: form.kode_unit,
             role: form.role,
             jabatan: form.jabatan || null,
-          })
+          }),
+        }
+      )
 
-        if (profileError) throw profileError
-      }
+      const result = await res.json()
+      if (!result.success) throw new Error(result.error)
 
-      setMessage({ type: 'success', text: 'User berhasil dibuat!' })
+      setMessage({ type: 'success', text: `User ${form.email} berhasil dibuat!` })
       setShowForm(false)
       setForm({ email: '', password: '', nama_lengkap: '', nip: '', kode_unit: '', role: 'CABANG_PEMBANTU', jabatan: '' })
       fetchUsers()
