@@ -15,7 +15,7 @@ import LogAktivitasPage from '@/pages/admin/LogAktivitasPage'
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/DataNasabah">
       <AuthProvider>
         <Routes>
           {/* Public */}
