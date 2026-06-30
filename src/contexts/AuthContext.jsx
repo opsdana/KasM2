@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, useCallback } from 'react'
+import { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react'
 import { supabase } from '@/lib/supabase'
 
 const AuthContext = createContext(null)
@@ -7,6 +7,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
   const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
+  const sessionRef = useRef(null)
 
   // Fetch profile dari tabel profiles
   const fetchProfile = useCallback(async (userId) => {
@@ -91,6 +92,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        sessionRef.current = session
         const currentUser = session?.user ?? null
         setUser(currentUser)
         if (currentUser) {
@@ -104,6 +106,7 @@ export function AuthProvider({ children }) {
 
     // Inisialisasi: cek session awal
     supabase.auth.getSession().then(({ data: { session } }) => {
+      sessionRef.current = session
       const currentUser = session?.user ?? null
       setUser(currentUser)
       if (currentUser) {
@@ -116,6 +119,15 @@ export function AuthProvider({ children }) {
     return () => subscription.unsubscribe()
   }, [fetchProfile])
 
+  const getToken = useCallback(async () => {
+    // Gunakan session dari ref (sinkron), fallback ke getSession
+    if (sessionRef.current?.access_token) {
+      return sessionRef.current.access_token
+    }
+    const { data: { session } } = await supabase.auth.getSession()
+    return session?.access_token || null
+  }, [])
+
   const value = {
     user,
     profile,
@@ -123,6 +135,7 @@ export function AuthProvider({ children }) {
     login,
     logout,
     catatLog,
+    getToken,
     isAuthenticated: !!user && !!profile,
   }
 

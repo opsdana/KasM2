@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils'
 import { Plus, UserX, RefreshCw, X, CheckCircle, AlertCircle } from 'lucide-react'
 
 export default function ManajemenUserPage() {
-  const { profile } = useAuth()
+  const { profile, getToken } = useAuth()
 
   const [users, setUsers] = useState([])
   const [total, setTotal] = useState(0)
@@ -88,8 +88,7 @@ export default function ManajemenUserPage() {
 
     try {
       // Call Edge Function (pakai service_role di backend)
-      const { data: { session } } = await supabase.auth.getSession()
-      const token = session?.access_token
+      const token = await getToken()
 
       if (!token) {
         throw new Error('Sesi tidak valid. Silakan login ulang.')
