@@ -88,7 +88,7 @@ export default function ManajemenUserPage() {
 
     try {
       // Call Edge Function (pakai service_role di backend)
-      const { data: session } = await supabase.auth.getSession()
+      const { data: { session } } = await supabase.auth.getSession()
       const token = session?.access_token
 
       if (!token) {
