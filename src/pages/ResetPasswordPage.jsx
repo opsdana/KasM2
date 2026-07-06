@@ -30,20 +30,44 @@ export default function ResetPasswordPage() {
 
   // Cek apakah user datang dari link reset password Supabase
   useEffect(() => {
-    const checkSession = async () => {
+    let cancelled = false
+
+    // 1. Cek session saat ini (mungkin sudah ada)
+    const checkInitial = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession()
-        // Supabase akan set session otomatis via hash `type=recovery`
-        if (session) {
+        if (!cancelled && session) {
           setHasValidSession(true)
+          setCheckingSession(false)
         }
       } catch (e) {
         console.error('Session check error:', e)
-      } finally {
-        setCheckingSession(false)
       }
     }
-    checkSession()
+    checkInitial()
+
+    // 2. Listen auth state change — Supabase butuh waktu proses hash fragment
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (!cancelled && session) {
+          setHasValidSession(true)
+          setCheckingSession(false)
+        } else if (!cancelled && !session && event === 'SIGNED_OUT') {
+          setCheckingSession(false)
+        }
+      }
+    )
+
+    // 3. Fallback: setelah 3 detik tetap set checking selesai
+    const timeout = setTimeout(() => {
+      if (!cancelled) setCheckingSession(false)
+    }, 3000)
+
+    return () => {
+      cancelled = true
+      subscription.unsubscribe()
+      clearTimeout(timeout)
+    }
   }, [])
 
   const handleSubmit = async (e) => {
