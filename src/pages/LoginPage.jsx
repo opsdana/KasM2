@@ -75,12 +75,6 @@ export default function LoginPage() {
                 <p className="text-brand-light text-sm">Sistem Monitoring Kepatuhan Data Nasabah</p>
               </div>
             </div>
-            <h2 className="text-3xl font-bold leading-tight mb-3">
-              Monitoring Data Nasabah
-            </h2>
-            <p className="text-lg text-gray-300">
-              Satu Platform, Seluruh Unit Kerja
-            </p>
           </div>
 
           <div className="space-y-6">
