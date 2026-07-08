@@ -76,7 +76,7 @@ export function AuthProvider({ children }) {
   // Lupa password — kirim email reset
   const resetPassword = useCallback(async (email) => {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/DataNasabah/reset-password`,
+      redirectTo: `${window.location.origin}/KasM2/reset-password`,
     })
 
     if (error) {

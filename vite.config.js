@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 
 export default defineConfig({
-  base: '/DataNasabah/',
+  base: '/KasM2/',
   plugins: [react()],
   resolve: {
     alias: {
